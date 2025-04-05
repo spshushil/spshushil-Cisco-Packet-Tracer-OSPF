@@ -1,0 +1,89 @@
+ROUTER 1
+
+en
+config t
+int f0/0
+ip add 10.0.0.0 255.0.0.0
+no sh
+exit
+
+int s2/0
+ip add 40.0.0.1 255.0.0.0
+no sh 
+exit
+
+---x------x------
+
+ROUTER 2
+
+en
+config t
+int f0/0
+ip add 20.0.0.0 255.0.0.0
+no sh
+exit
+
+int s2/0
+ip add 40.0.0.2 255.0.0.0
+no sh 
+exit
+
+int 
+s3/0
+ip add 50.0.0.2 255.0.0.0
+no sh
+exit
+
+---x-------x-------x----
+
+ROUTER 3
+
+en
+config t
+int f0/0
+ip add 30.0.0.0 255.0.0.0
+no sh
+exit
+
+int s2/0
+ip add 50.0.0.1 255.0.0.0
+no sh 
+exit
+
+------x-------x--------
+
+after assing ip's to the pc and router then INSERT OSPF command
+
+ROUTER 1 
+
+router ospf 1
+network 10.0.0.0 0.255.255.255 area 0
+network 20.0.0.0 0.255.255.255 area 0
+network 30.0.0.0 0.255.255.255 area 0
+network 40.0.0.0 0.255.255.255 area 0
+network 50.0.0.0 0.255.255.255 area 0
+exit
+
+ROUTER 2
+
+router ospf 1
+network 10.0.0.0 0.255.255.255 area 0
+network 20.0.0.0 0.255.255.255 area 0
+network 30.0.0.0 0.255.255.255 area 0
+network 40.0.0.0 0.255.255.255 area 0
+network 50.0.0.0 0.255.255.255 area 0
+exit
+
+
+ROUTER 3
+
+router ospf 1
+network 10.0.0.0 0.255.255.255 area 0
+network 20.0.0.0 0.255.255.255 area 0
+network 30.0.0.0 0.255.255.255 area 0
+network 40.0.0.0 0.255.255.255 area 0
+network 50.0.0.0 0.255.255.255 area 0
+exit
+
+------X--------X---------X-----
+
